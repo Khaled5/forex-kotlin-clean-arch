@@ -17,11 +17,18 @@ class ForexRepositoryImpl @Inject constructor(
     private val currencyEntityMapper: CurrencyEntityMapper
 ): IForexRepository {
 
+    private var dateFrom = 0
+    private var dateTo = 0
+
     override fun loginPartner(partner: Partner): Single<String> {
         return forexService.loginPartner(partnerEntityMapper.mapTo(partner))
     }
 
     override fun getPairs(pairsQuery: PairsQuery): Observable<List<Currency>> {
+
+        dateFrom = pairsQuery.to
+        dateTo = pairsQuery.to.toNextWeek()
+
             return forexService.getPairs(pairsQuery).map { list ->
                 list.map {
                     currencyEntityMapper.mapFrom(it)
@@ -30,8 +37,17 @@ class ForexRepositoryImpl @Inject constructor(
     }
 
     override fun getMorePairs(pairsQuery: PairsQuery): Observable<List<Currency>> {
-        pairsQuery.from = pairsQuery.to
-        pairsQuery.to = pairsQuery.to.toNextWeek()
+        if (dateFrom == 0 || dateTo == 0){
+            dateFrom = pairsQuery.to
+            dateTo = pairsQuery.to.toNextWeek()
+        }
+
+        dateFrom = dateTo
+        dateTo = dateTo.toNextWeek()
+
+        pairsQuery.from = dateTo
+        pairsQuery.to = dateTo.toNextWeek()
+
         return forexService.getPairs(pairsQuery).map { list ->
             list.map {
                 currencyEntityMapper.mapFrom(it)

@@ -19,13 +19,9 @@ class ForexAdapter @Inject constructor():  RecyclerView.Adapter<ForexViewHolder>
     override fun onBindViewHolder(holder: ForexViewHolder, position: Int) = holder.bind(currenciesList[position])
 
     fun submitList(list: List<Currency>){
-        /*currenciesList = list
-        notifyDataSetChanged()*/
-
         val initPosition = currenciesList.size - 1
         notifyItemRemoved(initPosition)
 
-        // insert news and the loading at the end of the list
         currenciesList.addAll(list)
         notifyItemRangeChanged(initPosition, currenciesList.size + 1)
         notifyDataSetChanged()
