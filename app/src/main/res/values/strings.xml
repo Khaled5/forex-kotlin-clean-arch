@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">CurrencyExchange</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="username">Email or username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+
+    <string name="check_internet">Please, check your internet connection and try again.</string>
+    <string name="error_occurred_try_again">Error has been occurred, please try again later.</string>
+    <string name="error_occurred">Error has been occurred, </string>
+    <string name="try_again">Try again</string>
+    <string name="required_data">Please fill missing information, all information are required here.</string>
+    <string name="logout">Logout</string>
+    <string name="forex">Forex</string>
+    <string name="price">Price</string>
+    <string name="cmd">CMD</string>
+    <string name="date">Date</string>
+    <string name="sl">SL</string>
+    <string name="tp">TP</string>
+</resources>
